@@ -1,0 +1,40 @@
+@import './base.css';
+
+:root {
+  --text-color: #333;
+  --accent-color: #ffbb00;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-color);
+
+}
+
+.main-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color);
+
+}
+
+.link {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.accent-background {
+  background-color: var(--accent-color);
+  color: #fff;
+}
