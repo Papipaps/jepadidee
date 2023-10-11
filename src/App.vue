@@ -2,7 +2,8 @@
 import { computed, onMounted, ref } from 'vue'
 import lottieLoaderAnimation from '@/assets/animations/loader.json'
 import ToolBox from '@/components/ToolBox.vue'
-const isLoaded = ref(false)
+const isLoading = ref(true)
+const isReady = ref(false)
 const themeRef = ref("")
 const timeRef = ref("")
 const subjectRef = ref("")
@@ -19,7 +20,7 @@ function handleSubject(subject: string) {
 
 onMounted(() => {
   setTimeout(() => {
-    isLoaded.value = true
+    isReady.value = true
   }, 3000)
 })
 const emptyidea = computed(() => (!(themeRef.value || timeRef.value || subjectRef.value)))
@@ -27,46 +28,83 @@ const emptyidea = computed(() => (!(themeRef.value || timeRef.value || subjectRe
 
 <template>
   <Transition appear class="lottie-animation">
-    <div v-if="!isLoaded">
+    <div v-if="isLoading">
       <vue3-lottie :animation-data="lottieLoaderAnimation" :height="400" :width="400" />
       <h1 class="title">Pas d'idée ? Ne t'inquiètes pas, on est la pour toi ! </h1>
+      <Transition :duration="1000" appear>
+        <div v-if="isReady" class="action">
+          <prime-button @click="isLoading = false" rounded outlined icon="pi pi-check" severity="secondary"
+            aria-label="Search"></prime-button>
+        </div>
+      </Transition>
     </div>
   </Transition>
-  <div v-if="isLoaded">
+  <div v-if="!isLoading">
     <header>
       <nav>
-        <tool-box @subject="handleSubject" @theme="handleTheme" @time="handleTime" />
       </nav>
     </header>
     <main>
-      <p v-if="emptyidea">
-        Aucune idée générée
-      </p>
-      <p v-else>
-        {{ timeRef }} {{ themeRef }}{{ subjectRef }}
-      </p>
+      <div class="centered-container">
+        <tool-box @subject="handleSubject" @theme="handleTheme" @time="handleTime" />
+        <div>
+          <span>Tu as </span>
+          <p class="card subtitle">{{ timeRef || 'Aucune idée générée' }} </p>
+          <span>pour dessiner </span>
+          <p class="card subtitle">{{ subjectRef || 'Aucune idée générée' }}</p>
+          <span>dans un theme </span>
+          <p class="card subtitle">{{ themeRef || 'Aucune idée générée' }}</p>
+        </div>
+      </div>
     </main>
   </div>
 </template>
 
-<style scoped> .lottie-animation {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   padding: 100px 50px;
-   display: flex;
-   justify-content: center;
-   text-align: center;
-   flex-direction: column;
- }
+<style lang="scss" scoped>
+.lottie-animation {
+  h1 {
+    margin-bottom: 16px;
+  }
 
- .v-enter-active,
- .v-leave-active {
-   transition: opacity 0.5s ease;
- }
+  .p-button {
+    scale: 1.5;
+  }
 
- .v-enter-from,
- .v-leave-to {
-   opacity: 0;
- }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 100px 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 100vh;
+}
+
+.card {
+  border-radius: 10px;
+  background-color: #eee;
+  width: 200px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>

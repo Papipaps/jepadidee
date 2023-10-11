@@ -8,5 +8,5 @@ export const times = [
     '1 heure 30 minutes',
     '2 heures',
     '2 heures 30 minutes',
-    'Illimité',
+    'Autant de temps que tu veux',
 ]; 

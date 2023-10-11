@@ -1,12 +1,3 @@
-<template>
-    <div>
-        <prime-button label="Check" icon="pi pi-check" @click="generateRandomData('theme')">Générer un Thème</prime-button>
-        <prime-button label="Check" icon="pi pi-check" @click="generateRandomData('subject')">Générer un
-            Sujet</prime-button>
-        <prime-button label="Check" icon="pi pi-check" @click="generateRandomData('time')">Générer un Temps</prime-button>
-    </div>
-</template>
-  
 <script setup lang="ts">
 import { defineEmits } from 'vue';
 import { times } from '@/assets/ideas/time'
@@ -26,6 +17,19 @@ function getRandomItem(items: string[]): string {
     return items[randomIndex];
 }
 </script>
+
+<template>
+    <div class="tool-actions p-buttonset">
+        <prime-button label="Générer un Temps" icon="pi pi-clock" @click="generateRandomData('time')" raised />
+        <prime-button label="Générer un Sujet" icon="pi pi-hashtag" @click="generateRandomData('subject')" raised />
+        <prime-button label="Générer un Thème" icon="pi pi-wrench" @click="generateRandomData('theme')" raised />
+    </div>
+</template>
   
-<style scoped></style>
+  
+<style scoped>
+.tool-actions>* {
+    margin: 8px;
+}
+</style>
   

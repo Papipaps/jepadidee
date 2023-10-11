@@ -9,6 +9,15 @@ module.exports = {
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  rules: {
+    "vue/html-indent": ["error", type, {
+      "attribute": 1,
+      "baseIndent": 1,
+      "closeBracket": 0,
+      "alignAttributesVertically": true,
+      "ignores": []
+    }]
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   }

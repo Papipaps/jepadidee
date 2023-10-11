@@ -1,5 +1,6 @@
 import './assets/main.css'
-import "primevue/resources/themes/lara-light-indigo/theme.css";
+import 'primeicons/primeicons.css';
+import "primevue/resources/themes/saga-orange/theme.css";
 
 import { createApp } from 'vue'
 import PrimeVue from 'primevue/config';
