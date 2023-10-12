@@ -19,11 +19,23 @@ function getRandomItem(items: string[]): string {
 </script>
 
 <template>
-    <div class="tool-actions p-buttonset">
-        <prime-button label="Générer un Temps" icon="pi pi-clock" @click="generateRandomData('time')" raised />
-        <prime-button label="Générer un Sujet" icon="pi pi-hashtag" @click="generateRandomData('subject')" raised />
-        <prime-button label="Générer un Thème" icon="pi pi-wrench" @click="generateRandomData('theme')" raised />
-    </div>
+  <div class="tool-actions p-buttonset">
+    <prime-button
+      label="Générer un Temps"
+      icon="pi pi-clock"
+      raised
+      @click="generateRandomData('time')" />
+    <prime-button
+      label="Générer un Sujet"
+      icon="pi pi-hashtag"
+      raised
+      @click="generateRandomData('subject')" />
+    <prime-button
+      label="Générer un Thème"
+      icon="pi pi-wrench"
+      raised
+      @click="generateRandomData('theme')" />
+  </div>
 </template>
   
   
