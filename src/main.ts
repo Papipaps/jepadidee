@@ -9,11 +9,16 @@ import App from './App.vue'
 import Vue3Lottie from 'vue3-lottie'
 
 import Button from "primevue/button"
+import Tooltip from 'primevue/tooltip';
+import ToastService from 'primevue/toastservice';
 
 const app = createApp(App)
 
 app.use(PrimeVue);
 app.use(Vue3Lottie)
+app.use(ToastService);
+
+app.directive('tooltip', Tooltip);
 
 app.component('PrimeButton', Button);
 
