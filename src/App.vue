@@ -50,16 +50,16 @@ function handlePalette(palette: Palette[]) {
     promptsOptions.value.palette = palette; 
 }
 
-async function copyColorToClipboard(hexColor: string){
-  await navigator.clipboard.writeText(hexColor)
-  toast.add({ severity: 'success', summary: 'Copié', detail: 'Le code hexadecimal de la couleur selectionné est dans le presse-papier. Ctrl+V pour coller la valeur.', life: 5000 });
+async function copyColorToClipboard(palette: Palette){
+  await navigator.clipboard.writeText(palette.hex)
+  toast.add({ severity: 'success', summary: 'Copié !', detail: `Le code hexadecimal ${palette.hex} est dans le presse-papier. Ctrl+V pour coller la valeur.`, life: 5000 });
 }
 
 const getEmptyMessage = (message:string) => message || 'Aucune idée générée'
 const {isModalOpen}=useModal(true) 
 </script>
 
-<template>
+<template> 
   <Toast/>
   <Transition>
     <opening-view/>
@@ -84,10 +84,10 @@ const {isModalOpen}=useModal(true)
             <prime-button
               v-for="(palette, index) in promptsOptions.palette" 
               :key="index"
-              v-tooltip.top="palette.name"
+              v-tooltip.top="palette.hex"
               class="color-square"
-              :style="{backgroundColor: palette.hex || 'white'}"
-              @click="copyColorToClipboard(palette.hex)"></prime-button>
+              :style="{backgroundColor: palette.hex}"
+              @click="copyColorToClipboard(palette)"></prime-button>
           </div> 
           <i>Cliquez sur la couleur pour copier la valeur hex (note: #RougeVertBlanc, donc rouge = #FF0000)</i>
         </div>
@@ -134,5 +134,12 @@ const {isModalOpen}=useModal(true)
   margin: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style> 

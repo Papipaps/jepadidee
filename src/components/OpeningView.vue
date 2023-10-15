@@ -25,17 +25,16 @@ defineExpose({open,close})
       :width="400" 
     />
     <p class="subtitle">Pas d'idée ? Ne t'inquiètes pas, on est la pour toi ! </p>
-    <Transition appear> 
-      <prime-button
-        rounded
-        outlined
-        icon="pi pi-check"
-        severity="secondary"
-        aria-label="Search"
-        @click="close"
-        v-if="isReady"  
-      />
-    </Transition>
+    <prime-button
+      rounded
+      outlined
+      icon="pi pi-check"
+      severity="secondary"
+      aria-label="Search"
+      @click="close"
+      :disabled="!isReady"
+      :style="{opacity: isReady?'1':'0'}"
+    />
   </div>
 </template> 
 
@@ -62,6 +61,6 @@ defineExpose({open,close})
   flex-direction: column;
   background-color: white;
 }
- 
+
 </style>
 
