@@ -10,7 +10,6 @@ import { onMounted, ref } from 'vue'
   }
   onMounted(()=>{
      openOnMount && open() 
-})
- 
+}) 
   return {  isModalOpen, close, open }
 }

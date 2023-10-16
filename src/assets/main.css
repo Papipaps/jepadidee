@@ -2,7 +2,8 @@
 
 :root {
   --text-color: #333;
-  --accent-color: #ffbb00;
+  --text-color-white: #eeeeee;
+  --accent-color: #ffbb00; 
 }
 
 .title {
@@ -28,6 +29,13 @@
 .link {
   color: var(--accent-color);
   text-decoration: none;
+}
+
+.router-link-active, .router-link-exact-active{
+  background-color: var(--accent-color);
+  color: black !important;
+  font-weight: 700;  
+  text-transform: uppercase;
 }
 
 .link:hover {
