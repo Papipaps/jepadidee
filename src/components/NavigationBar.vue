@@ -81,10 +81,11 @@
 
 <style lang="scss" scoped>
   .topnav {
+    z-index: 100;
     position: fixed;
     display: flex;
     width: 100%;
-    height: 48px;
+    height: var(--navbar-height);
     top: 0;
     left: 0;
     padding: 0;

@@ -4,6 +4,7 @@
   --text-color: #333;
   --text-color-white: #eeeeee;
   --accent-color: #ffbb00; 
+  --navbar-height: 48px;
 }
 
 .title {

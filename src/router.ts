@@ -19,8 +19,13 @@ const router = createRouter({
     },
     {
       path: '/tagmeup',
-      name: 'tag-me-up',
-      component: () => import(/*webpackChunkName:"tagmeup"*/ '@/components/views/UnavailableView.vue')
+      name: 'tagmeup',
+      component: () =>
+        import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('@/components/views/UnavailableView.vue')
     }
   ]
 })
