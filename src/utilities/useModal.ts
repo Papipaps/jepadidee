@@ -1,15 +1,15 @@
 import { onMounted, ref } from 'vue'
- 
- export function useModal(openOnMount=false) {  
+
+export function useModal(openOnMount = false) {
   const isModalOpen = ref(false)
-  function close(){ 
+  function close() {
     isModalOpen.value = false
   }
-  function open(){ 
+  function open() {
     isModalOpen.value = true
   }
-  onMounted(()=>{
-     openOnMount && open() 
-}) 
-  return {  isModalOpen, close, open }
+  onMounted(() => {
+    openOnMount && open()
+  })
+  return { isModalOpen, close, open }
 }
