@@ -50,20 +50,21 @@
 </script>
 
 <style scoped lang="scss">
-  .pin-list {
-    border: 1px solid blue;
-    background: white;
+  .pin-list { 
+    background: var(--text-color-white);
     border-radius: 5px;
     list-style: none;
-    padding: 0 10px;
+    padding: 24px;
+    min-height: 100px;
     display: grid;
     grid-template-columns: repeat(
       auto-fit,
-      minmax(200px, 1fr)
+      minmax(150px, 1fr)
     ); /* Changez les valeurs selon vos besoins */
+    grid-template-rows: min-content(2);
     li {
-      margin-bottom: 5px;
-      background: white;
+      margin: 8px auto;
+      width: 90%; 
       &:hover {
         cursor: pointer;
         filter: brightness(0.9);

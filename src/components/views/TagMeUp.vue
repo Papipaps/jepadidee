@@ -67,14 +67,15 @@
 </script>
 
 <template>
+  <prime-button
+    v-show="!isDialogVisible"
+    @click="toggleDialog"
+    class="toggle-pin-list"
+    icon="pi pi-angle-left"
+    aria-label="Filter"
+    rounded
+  />
   <main>
-    <prime-button
-      v-show="!isDialogVisible"
-      @click="toggleDialog"
-      class="toggle-pin-list"
-      icon="pi pi-angle-left"
-      aria-label="Filter"
-      rounded/>
     <tool-menu />
     <div class="pin-map-wrapper">
       <pin-map
@@ -130,6 +131,10 @@
 </template>
 
 <style lang="scss" scoped> 
+main{
+  max-height: 100vh; 
+  overflow: hidden;
+}
 .pin-map-wrapper{
   position: absolute;
   width: 100%;

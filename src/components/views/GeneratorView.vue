@@ -58,7 +58,6 @@
     })
   }
 
-  const getEmptyMessage = (message: string) => message || 'Aucune idée générée'
 </script>
 
 <template>
@@ -74,11 +73,11 @@
         />
         <div class="prompts">
           <span>Tu as </span>
-          <p class="card subtitle">{{ getEmptyMessage(promptsOptions.time) }} </p>
+          <p class="card subtitle">{{ promptsOptions.time }} </p>
           <span>pour dessiner </span>
-          <p class="card subtitle">{{ getEmptyMessage(promptsOptions.subject) }}</p>
+          <p class="card subtitle">{{ promptsOptions.subject }}</p>
           <span>dans un theme </span>
-          <p class="card subtitle">{{ getEmptyMessage(promptsOptions.theme) }}</p>
+          <p class="card subtitle">{{ promptsOptions.theme }}</p>
           <span>avec les couleurs suivante </span>
           <div class="card subtitle">
             <prime-button

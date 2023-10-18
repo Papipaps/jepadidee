@@ -4,7 +4,8 @@
   import Dialog from 'primevue/dialog'
   import InputText from 'primevue/inputtext'
   import Editor from 'primevue/editor'
-import { useElementSize } from '@vueuse/core/index.mjs'
+  import ColorPicker from 'primevue/colorpicker'
+  import { useElementSize } from '@vueuse/core/index.mjs'
 
   export interface Board {
     image: string
@@ -36,7 +37,8 @@ import { useElementSize } from '@vueuse/core/index.mjs'
   const image = inject('boardImage') as Ref<string>
   const tags = inject('boardTags') as Ref<Tag[]>
   const addTag = inject('addTag') as (value: Tag) => undefined
-  const settings = ref<{ size: TagSizesType; color: string }>({ color: '#FF0000', size: '15px' })
+  const updateTags = inject('updateTags') as (value: Tag[]) => undefined
+  const settings = ref<{ size: TagSizesType; color: string }>({ color: 'FF0000', size: '15px' })
   const newTag = ref<Tag>(initialState)
   const visible = ref<boolean>(false)
   const BoardImageRef = ref(null)
@@ -91,7 +93,7 @@ import { useElementSize } from '@vueuse/core/index.mjs'
         id: id,
         title: tagTitle,
         size: settings.value.size,
-        color: '#' + settings.value.color
+        color: settings.value.color
       }
       createPoint(newTag.value)
       addTag(newTag.value)
@@ -104,7 +106,6 @@ import { useElementSize } from '@vueuse/core/index.mjs'
   }
 
   function createPoint(point: Tag) {
-    console.log(point)
     const wrapper = document.getElementById('board')
     const span = document.createElement('span')
     span.title = point.title
@@ -119,7 +120,7 @@ import { useElementSize } from '@vueuse/core/index.mjs'
     span.style.transform = 'translate(-50%,-50%)'
 
     span.onmouseover = () => {
-      span.style.outlineOffset = '.6rem'
+      span.style.outlineOffset = '0.3rem'
       span.style.outline = '2px solid lightsalmon'
 
       span.style.cursor = 'pointer'
@@ -129,14 +130,15 @@ import { useElementSize } from '@vueuse/core/index.mjs'
     span.onmouseleave = () => {
       span.style.outline = 'none'
       span.style.scale = '1'
-      span.style.backgroundColor = point.color || 'white'
+      span.style.backgroundColor = '#'+point.color
     }
 
     span.style.zIndex = '10'
     span.style.width = point.size
     span.style.height = point.size
-    span.style.borderRadius = '50%'
-    span.style.backgroundColor = point.color || 'white'
+    span.style.borderRadius = '10%'
+    span.style.border = '1px solid white'
+    span.style.backgroundColor = `#${point.color || 'FFFFFF'}`
 
     wrapper?.appendChild(span)
   }
@@ -153,8 +155,11 @@ import { useElementSize } from '@vueuse/core/index.mjs'
   })
 
   onMounted(()=>{ 
-    console.log(tags.value)
-    tags.value.forEach((t)=>createPoint(t)) 
+     const saveTags = localStorage.getItem('tag-me-up-tags')
+    if (saveTags) { 
+      updateTags(JSON.parse(saveTags)) 
+      tags.value.forEach(tag=>createPoint(tag))
+    } 
   })
 </script>
 <template>
@@ -162,6 +167,7 @@ import { useElementSize } from '@vueuse/core/index.mjs'
     <Dialog
       @after-hide="handleDialogClose"
       :dismissable-mask="true"
+      style="width: 90vh;"
       v-model:visible="visible"
       header="Ajoutez une nouvelle épingle"
       modal
@@ -176,28 +182,47 @@ import { useElementSize } from '@vueuse/core/index.mjs'
           aria-describedby="title-help"
           placeholder="..."
         />
-        <p
+        <span
           v-show="isError"
-          class="error-msg">Le titre ne peut pas être vide. </p>
+          class="error-msg">Le titre ne peut pas être vide. </span>
+        <br />
         <br />
         <label for="title">Ajoutez une description</label>
         <Editor
-          editor-style="height: 350px"
+          editor-style="height: 350px;padding: 24px;"
           id="description"
-          v-model="newTag.description" />
+          v-model="newTag.description" >
+          <template #toolbar>
+            <span class="ql-formats">
+              <button
+                v-tooltip.bottom="'Bold'"
+                class="ql-bold"></button>
+              <button
+                v-tooltip.bottom="'Italic'"
+                class="ql-italic"></button>
+              <button
+                v-tooltip.bottom="'Underline'"
+                class="ql-underline"></button>
+            </span>
+          </template>
+        </Editor>
+          
         <div class="pen-tool">
           <label for="color">Couleur</label>
           <ColorPicker
             v-model="settings.color"
-            for="color"></ColorPicker>
-          <label for="size">Taille</label>
+            for="color"
+          />
+          <label for="size">Taille : <span style="font-weight: 700;">{{ settings.size }}</span></label> 
           <div class="pen-tool-size">
-            <span
+            <div
               v-for="(size, index) in tagSizes"
+              class="size"
               :key="index"
-              :style="{ width: size, height: size }"
+              :style="{ backgroundColor:`#${settings.color}` ,width: size, height: size }"
               @click="changePinSize(size)"
-            ></span>
+            >
+            </div> 
           </div>
         </div>
       </form>
@@ -241,10 +266,11 @@ import { useElementSize } from '@vueuse/core/index.mjs'
   width: 100%;
   display: flex;  
   justify-content: center;
+  border: 1px solid rgba(0,0,0,0.2);
   img{
     cursor: pointer;
     max-width:100%;
-    max-height:100%; 
+    max-height: calc(80vh - var(--navbar-height));
     min-height:300px ;
     min-width: 300px;
     margin:auto 0;
@@ -253,4 +279,19 @@ import { useElementSize } from '@vueuse/core/index.mjs'
     left: 0;    
   }
 }  
+.error-msg{
+  color: red;
+  margin-left: 8px;
+}
+.pen-tool-size{
+  .size{ 
+    cursor: pointer;  
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.2);
+  gap: 24px;
+}
+
 </style>

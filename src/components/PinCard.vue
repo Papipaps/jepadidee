@@ -4,7 +4,7 @@
       <template #header>
         <div
           class="card-wrapper"
-          :style="{ backgroundColor: tag.color }"></div>
+          :style="{ backgroundColor: `#${tag.color}` }"></div>
       </template>
       <template #title> {{ tag.title }} </template>
     </Card>
@@ -23,11 +23,11 @@
 
 <style scoped lang="scss">
   .card-wrapper {
-    height: 25px;
+    height: 25px; 
   }
-  .p-card {
-    width: 200px;
-    height: 100px;
+  .p-card {  
+    width: 100%;
+    height: 100%;
     background: white;
     img {
       width: 100%;

@@ -26,14 +26,14 @@ import type { Tag } from './PinMap.vue'
     <div
       id="tag-modal-description"
       class="tag-modal-description"></div>
-    <!-- TODO : AJOUTER UNE DIV ACTION AVEC DES BOUTONS SUPPRIMER/MODIFIER/AUTRES -->
     <div class="tag-actions">
       <prime-button
         @click="handleUpdate"
-        label="Modifier"></prime-button>
+        label="Modifier"
+        disabled/>
       <prime-button
         @click="handleRemove"
-        label="Supprimer"></prime-button>
+        label="Supprimer"/>
     </div>
   </div>
 </template>
@@ -44,6 +44,6 @@ import type { Tag } from './PinMap.vue'
     margin: 10px 0;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 </style>

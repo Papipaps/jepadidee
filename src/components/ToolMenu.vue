@@ -77,7 +77,7 @@
     position="top-right"
     group="br" />
   <div class="actions"> 
-    <div>
+    <div class="btn-group">
       <prime-button
         v-tooltip.top="$t('load')"
         class="upload-wrapper-btn"
@@ -118,8 +118,7 @@
         >
       </prime-button>
     </div>
-    <div>
-
+    <div class="btn-group">
       <prime-button
         :icon="PrimeIcons.SAVE"
         v-tooltip.top="$t('save')"
@@ -137,21 +136,38 @@
 </template>
 
 <style lang="scss" scoped>
- .actions {
-  button {
-    cursor: pointer;
-  } 
+ .actions { 
+  display: grid;
+  grid-template-rows: repeat(2,1fr);
+  height: 100px;
+  width: 200px;
   z-index: 2;
   transition: ease-in 200ms; 
   position: absolute;
-  bottom: 2vh;
   background-color: white;
-  padding: 20px;
-  display: flex;
+  box-shadow: 0 0 5px 5px rgba(255,150,0,0.1);
+  bottom: 2vh;
   left: 50%;
   transform: translateX(-50%);
-  gap: 5px;
   border-radius: 10px;
-  border: 1px solid rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,150,0,0.3);
+  .p-button{
+    border: 1px solid white; 
+    width: 100%;
+    height: 100%;  
+    padding: 0;
+    label, i{
+      cursor: pointer; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      margin: auto 0;
+    }
+  }
+  .btn-group{
+    display: flex;
+  }
 }
 </style>
