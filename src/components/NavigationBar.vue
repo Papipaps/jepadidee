@@ -14,16 +14,14 @@
     router.push(to).then(() => (isResponsive.value = false))
   }
   const isWindowSmall = computed(() => width.value < 600)
-  const tabs = [
+  const tabs = router.getRoutes().filter(r => r.name!=='landing').map((r,index) => 
     {
-      name: 'generator',
-      path: '/generator'
-    },
-    {
-      name: 'tagmeup',
-      path: '/tagmeup'
+      return {
+        name:r.name?.toString() || `route-sans-idée-${index}`,
+        path:r.path
+      }
     }
-  ]
+  )
 </script>
 <template>
   <prime-modal
@@ -64,7 +62,7 @@
           class="isactive"
           v-for="(tab, index) in tabs"
           :key="index"
-          :to="tab.name">
+          :to="tab.path">
           {{ tab.name }}
         </router-link>
       </div>
