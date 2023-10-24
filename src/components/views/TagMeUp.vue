@@ -25,8 +25,7 @@ import { saveDataToLocalStorage } from '@/utilities/save'
       if (wrapper && elem) {
           wrapper.removeChild(elem);
       }
-    })
-    tags.value = []
+    }) 
   }
   const addTag = (Tag: Tag) => {
     tags.value.push(Tag)

@@ -58,15 +58,9 @@ function handleSelect(e: Event, mode: 'json' | 'image') {
 function clearBoard() {
   localStorage.removeItem('tag-me-up-image')
   localStorage.removeItem('tag-me-up-tags')
-  const pinList = document.getElementById('board')
-  if (pinList) {
-    const tagElements = pinList.querySelectorAll('.tag')
-    tagElements.forEach((element) => {
-      element.remove()
-    })
-  }
   clearTags()
   clearImage()
+  updateTags([])
 }
 
 function exportBoard() { 

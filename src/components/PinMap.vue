@@ -37,6 +37,7 @@
   const image = inject('boardImage') as Ref<string>
   const tags = inject('boardTags') as Ref<Tag[]>
   const addTag = inject('addTag') as (value: Tag) => undefined
+  const clearTags = inject('clearTags') as () => undefined
   const updateTags = inject('updateTags') as (value: Tag[]) => undefined
   const settings = ref<{ size: TagSizesType; color: string }>({ color: 'FF0000', size: '15px' })
   const newTag = ref<Tag>(initialState)
@@ -162,7 +163,8 @@
     } 
   })
 
-  watch([tags],()=>{
+  watch([tags],()=>{ 
+    clearTags()
     tags.value.forEach(tag=>createPoint(tag))
   })
 </script>
