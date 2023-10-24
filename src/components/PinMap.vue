@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, inject, onMounted, ref, type Ref } from 'vue'
+  import { computed, inject, onMounted, ref, watch, type Ref } from 'vue'
   import { saveDataToLocalStorage } from '@/utilities/save'
   import Dialog from 'primevue/dialog'
   import InputText from 'primevue/inputtext'
@@ -156,10 +156,14 @@
 
   onMounted(()=>{ 
      const saveTags = localStorage.getItem('tag-me-up-tags')
-    if (saveTags) { 
+     if (saveTags) { 
       updateTags(JSON.parse(saveTags)) 
       tags.value.forEach(tag=>createPoint(tag))
     } 
+  })
+
+  watch([tags],()=>{
+    tags.value.forEach(tag=>createPoint(tag))
   })
 </script>
 <template>
@@ -229,7 +233,8 @@
       <prime-button
         label="Confirmer"
         :disabled="isError"
-        @click="handleCreateTag"></prime-button>
+        @click="handleCreateTag"
+      />
     </Dialog> 
     <div 
       class="board">
@@ -245,6 +250,7 @@
             @click="handleClick"
             :src="getBackgroundImg"
           />
+          <p v-show="!image" >L'image que vous chargez doit faire moins de 5 Mo.</p>
         </div>
       </div>
     </div>
@@ -260,19 +266,22 @@
   position: relative;
   width: fit-content;
   height: fit-content;
+  p{
+    text-align: center;
+    font-style: italic;
+    opacity: 0.5;
+  }
 }
 .boardImg{ 
   height: 100%; 
   width: 100%;
   display: flex;  
   justify-content: center;
-  border: 1px solid rgba(0,0,0,0.2);
+  align-items: center;
   img{
     cursor: pointer;
     max-width:100%;
     max-height: calc(80vh - var(--navbar-height));
-    min-height:300px ;
-    min-width: 300px;
     margin:auto 0;
     position: relative;
     top: 0;

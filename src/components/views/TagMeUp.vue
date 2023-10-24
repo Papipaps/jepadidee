@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import ToolMenu from '@/components/ToolMenu.vue'
   import PinMap, { type Tag } from '@/components/PinMap.vue'
-  import { onMounted, provide, ref, type Ref } from 'vue'
+  import { onMounted, provide, ref, watch, type Ref } from 'vue'
   import PinList from '@/components/PinList.vue'
   import Dialog from 'primevue/dialog' 
   import TagModal from '@/components/TagModal.vue'
+import { saveDataToLocalStorage } from '@/utilities/save'
   const image = ref('')
   const tags = ref<Tag[]>([])
 
@@ -18,6 +19,13 @@
     tags.value = value
   }
   const clearTags = () => {
+    const wrapper = document.getElementById('board')
+    tags.value.forEach((tag:Tag)=>{
+      const elem = document.getElementById(tag.id);
+      if (wrapper && elem) {
+          wrapper.removeChild(elem);
+      }
+    })
     tags.value = []
   }
   const addTag = (Tag: Tag) => {
@@ -56,6 +64,14 @@
     toggleDialog()
     preview.value = null
   }
+
+  watch([image],()=>{ 
+    saveDataToLocalStorage('tag-me-up-image', image.value)
+  })
+  watch([tags],()=>{ 
+    saveDataToLocalStorage('tag-me-up-tags', tags.value)
+  })
+  
   onMounted(() => {
     const saveImage = localStorage.getItem('tag-me-up-image')
     const saveTags = localStorage.getItem('tag-me-up-tags')

@@ -1,8 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useToast } from 'primevue/usetoast'
-  import ToolBox from '@/components/ToolBox.vue'
-  import Toast from 'primevue/toast'
+  import ToolBox from '@/components/ToolBox.vue' 
   import AnimatedBackground from '@/assets/AnimatedBackground.vue'
   interface Palette {
     name: string
@@ -60,8 +59,7 @@
 
 </script>
 
-<template>
-  <Toast />
+<template> 
   <main>
     <section class="centered-container">
       <div class="content">

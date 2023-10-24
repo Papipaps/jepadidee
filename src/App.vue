@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
   import NavigationBar from '@/components/NavigationBar.vue' 
+  import Toast from 'primevue/toast';
 </script>
 <template>
   <main>
+    <Toast/>
     <navigation-bar v-if="!$route.meta.hideNavbar" />
     <RouterView />
   </main>
