@@ -13,13 +13,13 @@ const router = createRouter({
     },
     {
       path: '/generator',
-      name: 'generator',
+      name: 'Générateur d\'idée',
       component: () =>
         import(/*webpackChunkName:"generator"*/ '@/components/views/GeneratorView.vue')
     },
     {
       path: '/tagmeup',
-      name: 'tagmeup',
+      name: 'Tag Me Up',
       component: () =>
         import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
     },

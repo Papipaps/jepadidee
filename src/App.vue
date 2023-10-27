@@ -2,11 +2,17 @@
   import { RouterView } from 'vue-router'
   import NavigationBar from '@/components/NavigationBar.vue' 
   import Toast from 'primevue/toast';
+import InformationModal from './components/InformationModal.vue';
 </script>
 <template>
   <main>
-    <Toast/>
-    <navigation-bar v-if="!$route.meta.hideNavbar" />
+    <div
+      class="HUD"
+      v-if="!$route.meta.hideNavbar">
+      <Toast/>
+      <InformationModal/>
+      <navigation-bar />
+    </div>
     <RouterView />
   </main>
 </template>

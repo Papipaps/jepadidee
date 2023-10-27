@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
   import { RouterLink } from 'vue-router'
   import { useWindowSize } from '@vueuse/core'
   import router from '@/router'
@@ -14,16 +14,18 @@
     router.push(to).then(() => (isResponsive.value = false))
   }
   const isWindowSmall = computed(() => width.value < 600)
-  const tabs = [
-    {
-      name: 'generator',
-      path: '/generator'
-    },
-    {
-      name: 'tagmeup',
-      path: '/tagmeup'
-    }
-  ]
+  const tabs = router.getRoutes()
+    .filter(route=>route.name && route.name !== 'landing')
+    .map(route => {
+      console.log(route)
+      return {
+        name: route.name,
+        path: route.path
+      }
+    })
+  onMounted(() => {
+    console.log(tabs)
+  })
 </script>
 <template>
   <prime-modal
@@ -46,7 +48,7 @@
           v-for="(tab, index) in tabs"
           class="responsive-action"
           :key="index"
-          @click="handleNavigation(tab.name)"
+          @click="handleNavigation(tab.path)"
         >
           {{ tab.name }}
         </prime-button>
@@ -64,7 +66,7 @@
           class="isactive"
           v-for="(tab, index) in tabs"
           :key="index"
-          :to="tab.name">
+          :to="tab.path">
           {{ tab.name }}
         </router-link>
       </div>
