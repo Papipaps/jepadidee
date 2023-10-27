@@ -87,7 +87,7 @@ function exportBoard() {
   <div class="actions">
     <div class="btn-group">
       <prime-button
-        v-tooltip.top="$t('load')"
+        v-tooltip.top="$t('tagmeup.load')"
         class="upload-wrapper-btn">
         <label
           for="imageUpload"
@@ -104,7 +104,7 @@ function exportBoard() {
         </label>
       </prime-button>
       <prime-button
-        v-tooltip.top="$t('import')"
+        v-tooltip.top="$t('tagmeup.import')"
         class="upload-wrapper-btn">
         <label
           for="jsonUpload"
@@ -125,13 +125,13 @@ function exportBoard() {
     <div class="btn-group">
       <prime-button
         :icon="PrimeIcons.SAVE"
-        v-tooltip.top="$t('save')"
+        v-tooltip.top="$t('tagmeup.save')"
         severity="success"
         @click="exportBoard"
       />
       <prime-button
         :icon="PrimeIcons.REFRESH"
-        v-tooltip.top="$t('clear')"
+        v-tooltip.top="$t('tagmeup.clear')"
         severity="danger"
         @click="clearBoard"
       />

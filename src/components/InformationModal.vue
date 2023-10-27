@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import router from '@/router';
 import { useModal } from '@/utilities/useModal';
-import { watch } from 'vue';
 
 const {isModalOpen,open} = useModal()
-
-watch([router.currentRoute],()=>{
-  console.log(router.currentRoute.value.name)
-})
+ 
 </script>
 
 <template>
@@ -18,7 +14,9 @@ watch([router.currentRoute],()=>{
     :header="`Comment fonctionne la page ${String(router.currentRoute.value.name)}`"
     :style="{ width: '50vw' }">
     <slot name="content">
-      {{$t("tagmeup.explaination")}}
+      <p class="text-content">
+        {{$t(`${router.currentRoute.value.path.replace("/",'')}.explaination`)}}
+      </p>
     </slot>
   </prime-modal>
   <i
@@ -43,5 +41,16 @@ watch([router.currentRoute],()=>{
   }
   font-weight: 700;
   font-size: larger;
+}
+
+.text-content{
+  text-align: justify;
+  padding: 16px;
+  // font-style: italic;
+  line-height: 1.7rem;
+  color: var(--text-color);
+  width: 100%;
+  margin: 0 auto;
+  max-width: 600px;
 }
 </style>

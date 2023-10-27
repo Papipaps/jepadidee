@@ -9,7 +9,7 @@
   }
 
   interface PromptsOptions {
-    theme: string
+    style: string
     time: string
     subject: string
     palette: Palette[]
@@ -18,13 +18,13 @@
   const initialPrompt: PromptsOptions = {
     palette: [
       { hex: '#FFF', name: 'white' },
-      { hex: '#00FF00', name: 'Cyan' },
-      { hex: '#FF0000', name: 'Magenta' },
-      { hex: '#FFFF00', name: 'Yellow' },
-      { hex: '#000000', name: 'Key (Black)' }
+      { hex: '#00FF00', name: 'Vert' },
+      { hex: '#FF0000', name: 'Rouge' },
+      { hex: '#0000FF', name: 'Bleu' },
+      { hex: '#000000', name: 'Noir' }
     ],
     subject: '?',
-    theme: '?',
+    style: '?',
     time: '?'
   }
 
@@ -35,8 +35,8 @@
     promptsOptions.value.time = time
   }
 
-  function handleTheme(theme: string) {
-    promptsOptions.value.theme = theme
+  function handleStyle(style: string) {
+    promptsOptions.value.style = style
   }
 
   function handleSubject(subject: string) {
@@ -65,7 +65,7 @@
       <div class="content">
         <tool-box
           @subject="handleSubject"
-          @theme="handleTheme"
+          @style="handleStyle"
           @time="handleTime"
           @palette="handlePalette"
         />
@@ -74,8 +74,8 @@
           <p class="card subtitle">{{ promptsOptions.time }} </p>
           <span>pour dessiner </span>
           <p class="card subtitle">{{ promptsOptions.subject }}</p>
-          <span>dans un theme </span>
-          <p class="card subtitle">{{ promptsOptions.theme }}</p>
+          <span>dans un style </span>
+          <p class="card subtitle">{{ promptsOptions.style }}</p>
           <span>avec les couleurs suivante </span>
           <div class="card subtitle">
             <prime-button
@@ -88,7 +88,7 @@
             ></prime-button>
           </div>
           <i
-          >Cliquez sur la couleur pour copier la valeur hex (note: #RougeVertBlanc, donc rouge =
+          >Cliquez sur la couleur pour copier la valeur hex (note: #RougeVertBleu, donc rouge =
             #FF0000)</i
           >
         </div>

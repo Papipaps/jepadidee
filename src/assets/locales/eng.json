@@ -1,10 +1,12 @@
 {
-  "tagmeup": {
-    "explaination": "blabla blabla",
+  "tagmeup": { 
     "save": "Save",
     "import": "Import JSON file",
     "clear": "Clear",
     "load": "Load an image",
-    "unavailable": "Unavailable"
+    "explaination": "Here, it's 'Tag Me Up'! The concept is simple, perhaps useless but definitely simple (in reality, it's up to you to find its purpose, lol). Basically, you can upload an image, click anywhere on it, and add instructions, called pins (or tags). Each pin can be found on the image with a label where you clicked! You can also find them on the right by clicking the arrow, which will reveal a menu with all your tags! In the future, we will offer more functionalities with this tool while we wait to discover what it might be useful for, ahahaha."
+  },
+  "generator": {
+    "explaination": "Welcome to the Idea Generator page! Here, you will find four buttons. Click on any of them to provide you with a random word that corresponds to the specific criteria on the button. This way, you'll get a drawing idea suggestion! Click on one of the colors on the generated palette to copy its HEX code to your clipboard! 😎🤙"
   }
 }

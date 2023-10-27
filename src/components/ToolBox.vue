@@ -1,13 +1,13 @@
 <script setup lang="ts">
   import { defineEmits } from 'vue'
   import { times } from '@/assets/ideas/time'
-  import { themes } from '@/assets/ideas/theme'
+  import { style } from '@/assets/ideas/style'
   import { subjects } from '@/assets/ideas/subjects'
 
-  const emit = defineEmits(['theme', 'subject', 'time', 'palette'])
+  const emit = defineEmits(['style', 'subject', 'time', 'palette'])
 
-  function generateRandomData(dataType: 'theme' | 'subject' | 'time') {
-    const dataItems = dataType === 'theme' ? themes : dataType === 'subject' ? subjects : times
+  function generateRandomData(dataType: 'style' | 'subject' | 'time') {
+    const dataItems = dataType === 'style' ? style : dataType === 'subject' ? subjects : times
     const generatedData = getRandomItem(dataItems)
     emit(dataType, generatedData)
   }
@@ -49,11 +49,11 @@
       @click="generateRandomData('subject')"
     />
     <prime-button
-      label="Générer un Thème"
+      label="Générer un Style"
       icon="pi pi-wrench"
       raised
       rounded
-      @click="generateRandomData('theme')"
+      @click="generateRandomData('style')"
     />
     <prime-button
       label="Générer une Palette"
