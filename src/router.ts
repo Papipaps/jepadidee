@@ -8,19 +8,27 @@ const router = createRouter({
       name: 'landing',
       component: OpeningView,
       meta: {
-        hideNavbar: true
+        hideHUD: true
       }
     },
     {
       path: '/generator',
       name: 'Générateur d\'idée',
       component: () =>
-        import(/*webpackChunkName:"generator"*/ '@/components/views/GeneratorView.vue')
+      import(/*webpackChunkName:"generator"*/ '@/components/views/GeneratorView.vue')
     },
     {
       path: '/tagmeup',
-      name: 'tagmeup',
-      component: () => import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
+      name: 'Tag Me Up',
+      component: () =>
+      import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
+    },
+    {
+      path: "/:pathMatch(.*)*", 
+      component: () => import('@/components/views/UnavailableView.vue'),
+      meta: {
+        hideHUD: true
+      }
     }
   ]
 })

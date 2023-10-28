@@ -1,11 +1,28 @@
 <script setup lang="ts">
+import router from '@/router';
+import {onMounted, ref, watch} from 'vue'
 
+const countDown = ref(5) 
+function start(){
+  setInterval(()=>{
+    countDown.value -= 1
+  },1000)
+}
+watch([countDown],()=>{
+  if(countDown.value <0)
+    router.push('generator')
+})
+onMounted(()=>{
+     start()
+})
 </script>
 <template>
   <main>
-    <h1 class="title">Cette partie n'est pas encore terminée.</h1>
-    <p class="subtitle">Reviens plus tard.</p>
-    <img src="/src/assets/images/ori.png"/>
+    <h1 class="title">Cette page n'existe pas.</h1>
+    <p class="subtitle">NE REVIENS PAS ICI SINON JE TE <span style="color: red;font-size: x-large;font-weight: 900;">#$ù*$^!&</span></p>
+    <img src="/src/assets/images/ori.webp"/>
+    <br>
+    <p>Vous allez être redirigé dans <span style="font-weight: 700;">{{ countDown }}</span> secondes</p>
   </main>
 </template>
 

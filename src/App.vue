@@ -8,7 +8,7 @@ import InformationModal from './components/InformationModal.vue';
   <main>
     <div
       class="HUD"
-      v-if="!$route.meta.hideNavbar">
+      v-if="!$route.meta.hideHUD">
       <Toast/>
       <InformationModal/>
       <navigation-bar />
