@@ -24,7 +24,7 @@ const router = createRouter({
       import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
     },
     {
-      path: "/:pathMatch(.*)*", 
+      path: '/:pathMatch(.*)*', 
       component: () => import('@/components/views/UnavailableView.vue'),
       meta: {
         hideHUD: true
