@@ -27,6 +27,7 @@
         <prime-button
           rounded
           outlined
+          class="go-btn"
           icon="pi pi-check"
           severity="secondary"
           aria-label="Search"
@@ -47,6 +48,11 @@
       width: 50px;
       height: 50px;
       margin: 10px auto;
+      transition: ease-in 50ms;
+      &:hover{
+        scale: 1.2;
+        color: var(--accent-color);
+      }
     }
 
     position: absolute;

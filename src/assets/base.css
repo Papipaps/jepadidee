@@ -6,8 +6,7 @@
   font-weight: normal;
 }
 
-body {
-  height: 100vh;
+body { 
   color: var(--color-text);
   background: var(--color-background);
   font-family:

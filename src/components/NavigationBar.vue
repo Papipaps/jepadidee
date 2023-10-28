@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed, onMounted, ref } from 'vue'
   import { RouterLink } from 'vue-router'
   import { useWindowSize } from '@vueuse/core'
   import router from '@/router'
@@ -14,14 +14,18 @@
     router.push(to).then(() => (isResponsive.value = false))
   }
   const isWindowSmall = computed(() => width.value < 600)
-  const tabs = router.getRoutes().filter(r => r.name!=='landing').map((r,index) => 
-    {
+  const tabs = router.getRoutes()
+    .filter(route=>route.name && route.name !== 'landing')
+    .map(route => {
+      console.log(route)
       return {
-        name:r.name?.toString() || `route-sans-idée-${index}`,
-        path:r.path
+        name: route.name,
+        path: route.path
       }
-    }
-  )
+    })
+  onMounted(() => {
+    console.log(tabs)
+  })
 </script>
 <template>
   <prime-modal
@@ -44,7 +48,7 @@
           v-for="(tab, index) in tabs"
           class="responsive-action"
           :key="index"
-          @click="handleNavigation(tab.name)"
+          @click="handleNavigation(tab.path)"
         >
           {{ tab.name }}
         </prime-button>
@@ -79,10 +83,11 @@
 
 <style lang="scss" scoped>
   .topnav {
+    z-index: 100;
     position: fixed;
     display: flex;
     width: 100%;
-    height: 48px;
+    height: var(--navbar-height);
     top: 0;
     left: 0;
     padding: 0;

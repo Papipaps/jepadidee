@@ -19,7 +19,7 @@ const router = createRouter({
     },
     {
       path: '/tagmeup',
-      name: 'Tag Me Up !',
+      name: 'tagmeup',
       component: () => import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
     }
   ]

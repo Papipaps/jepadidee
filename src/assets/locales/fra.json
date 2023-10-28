@@ -1,0 +1,12 @@
+{
+  "tagmeup":{ 
+    "save":"Sauvegarder",
+    "import":"Importer un fichier JSON",
+    "clear":"Réinitialiser",
+    "load":"Charger une image",
+    "explaination":"Vous voici sur 'Tag Me Up' ! Ce concept, bien que simple (ou même inutile, enfin, c'est à vous de décider ! 😄), vous offre la possibilité de charger une image, cliquer n'importe où sur celle-ci, et y ajouter des instructions sous forme d'épingles, que nous appelons des \"tags\". Chaque tag peut être localisé sur l'image en un simple clic, grâce à une étiquette à l'emplacement précis de votre choix. De plus, pour plus de commodité, retrouvez tous vos tags dans un menu déroulant à droite de l'image en cliquant sur la flèche. Dans le futur, nous prévoyons d'intégrer encore plus de fonctionnalités à cet outil, en attendant de découvrir à quoi il pourrait bien vous servir ! 😄😁"
+  },
+  "generator":{
+    "explaination":"Explorez notre générateur d'idées créatives ! Il vous suffit de cliquer sur l'un des quatre boutons pour découvrir un mot aléatoire correspondant au critère spécifié, vous offrant ainsi une source d'inspiration pour votre prochain dessin. De plus, choisissez une couleur dans la palette générée et copiez facilement son code HEX dans votre presse-papiers pour une expérience encore plus artistique. 😎🤙"
+  }
+}
