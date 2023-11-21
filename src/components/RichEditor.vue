@@ -1,8 +1,6 @@
 <template>
   <div class="card">
-    <Editor
-      v-model="value"
-      editor-style="height: 320px" />
+    <Editor v-model="value" editor-style="height: 320px" />
   </div>
 </template>
 

@@ -3,9 +3,9 @@
   import PinMap, { type Tag } from '@/components/PinMap.vue'
   import { onMounted, provide, ref, watch, type Ref } from 'vue'
   import PinList from '@/components/PinList.vue'
-  import Dialog from 'primevue/dialog' 
+  import Dialog from 'primevue/dialog'
   import TagModal from '@/components/TagModal.vue'
-import { saveDataToLocalStorage } from '@/utilities/save'
+  import { saveDataToLocalStorage } from '@/utilities/save'
   const image = ref('')
   const tags = ref<Tag[]>([])
 
@@ -20,12 +20,12 @@ import { saveDataToLocalStorage } from '@/utilities/save'
   }
   const clearTags = () => {
     const wrapper = document.getElementById('board')
-    tags.value.forEach((tag:Tag)=>{
-      const elem = document.getElementById(tag.id);
+    tags.value.forEach((tag: Tag) => {
+      const elem = document.getElementById(tag.id)
       if (wrapper && elem) {
-          wrapper.removeChild(elem);
+        wrapper.removeChild(elem)
       }
-    }) 
+    })
   }
   const addTag = (Tag: Tag) => {
     tags.value.push(Tag)
@@ -56,7 +56,7 @@ import { saveDataToLocalStorage } from '@/utilities/save'
     }
   }
 
-  function toggleDialog() { 
+  function toggleDialog() {
     isDialogVisible.value = !isDialogVisible.value
   }
   function handleDialogClose() {
@@ -64,19 +64,19 @@ import { saveDataToLocalStorage } from '@/utilities/save'
     preview.value = null
   }
 
-  watch([image],()=>{ 
+  watch([image], () => {
     saveDataToLocalStorage('tag-me-up-image', image.value)
   })
-  watch([tags],()=>{ 
+  watch([tags], () => {
     saveDataToLocalStorage('tag-me-up-tags', tags.value)
   })
-  
+
   onMounted(() => {
     const saveImage = localStorage.getItem('tag-me-up-image')
     const saveTags = localStorage.getItem('tag-me-up-tags')
     if (saveImage && saveTags) {
-      updateImage( JSON.parse(saveImage))
-      updateTags(JSON.parse(saveTags)) 
+      updateImage(JSON.parse(saveImage))
+      updateTags(JSON.parse(saveTags))
     }
   })
 </script>
@@ -93,9 +93,7 @@ import { saveDataToLocalStorage } from '@/utilities/save'
   <main>
     <tool-menu />
     <div class="pin-map-wrapper">
-      <pin-map
-        class="pin-map"
-        @click-tag="handleTagSelection" />
+      <pin-map class="pin-map" @click-tag="handleTagSelection" />
     </div>
     <section>
       <Dialog
@@ -110,9 +108,7 @@ import { saveDataToLocalStorage } from '@/utilities/save'
         <template #header>
           <h2>{{ preview.title }}</h2>
         </template>
-        <tag-modal
-          :preview="preview"
-          @close="handleDialogClose" />
+        <tag-modal :preview="preview" @close="handleDialogClose" />
       </Dialog>
       <Dialog
         v-else
@@ -129,44 +125,43 @@ import { saveDataToLocalStorage } from '@/utilities/save'
             (plus pratique que de chercher sur l'image 😎✌️)
           </h3>
         </template>
-        <pin-list
-          @click-tag="handleTagSelection"
-          :tags="tags" />
+        <pin-list @click-tag="handleTagSelection" :tags="tags" />
         <template #footer>
           <prime-button
             @click="clearTags"
             label="Tout Supprimer"
             icon="pi pi-times"
             severity="danger"
-            raised></prime-button>
+            raised
+          ></prime-button>
         </template>
       </Dialog>
     </section>
   </main>
 </template>
 
-<style lang="scss" scoped> 
-main{
-  max-height: 100vh; 
-  overflow: hidden;
-}
-.pin-map-wrapper{
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.toggle-pin-list{
-  z-index: 10;
-  position: absolute;
-  scale: 1.5;
-  right: 3vh;
-  bottom: calc(50vh - var(--navbar-height));
-  &:hover{
-    scale: 1.7;
+<style lang="scss" scoped>
+  main {
+    max-height: 100vh;
+    overflow: hidden;
   }
-  transition: ease-in 50ms;
-}
+  .pin-map-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .toggle-pin-list {
+    z-index: 10;
+    position: absolute;
+    scale: 1.5;
+    right: 3vh;
+    bottom: calc(50vh - var(--navbar-height));
+    &:hover {
+      scale: 1.7;
+    }
+    transition: ease-in 50ms;
+  }
 </style>

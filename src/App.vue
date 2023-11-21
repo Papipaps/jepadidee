@@ -1,16 +1,14 @@
 <script setup lang="ts">
   import { RouterView } from 'vue-router'
-  import NavigationBar from '@/components/NavigationBar.vue' 
-  import Toast from 'primevue/toast';
-import InformationModal from './components/InformationModal.vue';
+  import NavigationBar from '@/components/NavigationBar.vue'
+  import Toast from 'primevue/toast'
+  import InformationModal from './components/InformationModal.vue'
 </script>
 <template>
   <main>
-    <div
-      class="HUD"
-      v-if="!$route.meta.hideHUD">
-      <Toast/>
-      <InformationModal/>
+    <div class="HUD" v-if="!$route.meta.hideHUD">
+      <Toast />
+      <InformationModal />
       <navigation-bar />
     </div>
     <RouterView />

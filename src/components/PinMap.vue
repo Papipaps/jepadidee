@@ -43,14 +43,14 @@
   const newTag = ref<Tag>(initialState)
   const visible = ref<boolean>(false)
   const BoardImageRef = ref(null)
-  const {width: imageWidth,height: imageHeight} = useElementSize(BoardImageRef)
+  const { width: imageWidth, height: imageHeight } = useElementSize(BoardImageRef)
   const emit = defineEmits(['click-tag'])
 
   function handleClick(event: MouseEvent) {
     if (image.value) {
-      newTag.value.x = event.offsetX*100/imageWidth.value
-      newTag.value.y = event.offsetY*100/imageHeight.value
-       visible.value = !visible.value
+      newTag.value.x = (event.offsetX * 100) / imageWidth.value
+      newTag.value.y = (event.offsetY * 100) / imageHeight.value
+      visible.value = !visible.value
     }
   }
 
@@ -131,7 +131,7 @@
     span.onmouseleave = () => {
       span.style.outline = 'none'
       span.style.scale = '1'
-      span.style.backgroundColor = '#'+point.color
+      span.style.backgroundColor = '#' + point.color
     }
 
     span.style.zIndex = '10'
@@ -149,23 +149,23 @@
     return input.length === 0 || input.length > 32
   })
   const getBackgroundImg = computed(() => {
-    if (image.value &&  image.value !== '') {
+    if (image.value && image.value !== '') {
       return image.value
     }
     return '/not_found.jpg'
   })
 
-  onMounted(()=>{ 
-     const saveTags = localStorage.getItem('tag-me-up-tags')
-     if (saveTags) { 
-      updateTags(JSON.parse(saveTags)) 
-      tags.value.forEach(tag=>createPoint(tag))
-    } 
+  onMounted(() => {
+    const saveTags = localStorage.getItem('tag-me-up-tags')
+    if (saveTags) {
+      updateTags(JSON.parse(saveTags))
+      tags.value.forEach((tag) => createPoint(tag))
+    }
   })
 
-  watch([tags],()=>{ 
+  watch([tags], () => {
     clearTags()
-    tags.value.forEach(tag=>createPoint(tag))
+    tags.value.forEach((tag) => createPoint(tag))
   })
 </script>
 <template>
@@ -173,7 +173,7 @@
     <Dialog
       @after-hide="handleDialogClose"
       :dismissable-mask="true"
-      style="width: 90vh;"
+      style="width: 90vh"
       v-model:visible="visible"
       header="Ajoutez une nouvelle épingle"
       modal
@@ -188,121 +188,99 @@
           aria-describedby="title-help"
           placeholder="..."
         />
-        <span
-          v-show="isError"
-          class="error-msg">Le titre ne peut pas être vide. </span>
+        <span v-show="isError" class="error-msg">Le titre ne peut pas être vide. </span>
         <br />
         <br />
         <label for="title">Ajoutez une description</label>
         <Editor
           editor-style="height: 350px;padding: 24px;"
           id="description"
-          v-model="newTag.description" >
+          v-model="newTag.description"
+        >
           <template #toolbar>
             <span class="ql-formats">
-              <button
-                v-tooltip.bottom="'Bold'"
-                class="ql-bold"></button>
-              <button
-                v-tooltip.bottom="'Italic'"
-                class="ql-italic"></button>
-              <button
-                v-tooltip.bottom="'Underline'"
-                class="ql-underline"></button>
+              <button v-tooltip.bottom="'Bold'" class="ql-bold"></button>
+              <button v-tooltip.bottom="'Italic'" class="ql-italic"></button>
+              <button v-tooltip.bottom="'Underline'" class="ql-underline"></button>
             </span>
           </template>
         </Editor>
-          
+
         <div class="pen-tool">
           <label for="color">Couleur</label>
-          <ColorPicker
-            v-model="settings.color"
-            for="color"
-          />
-          <label for="size">Taille : <span style="font-weight: 700;">{{ settings.size }}</span></label> 
+          <ColorPicker v-model="settings.color" for="color" />
+          <label for="size"
+            >Taille : <span style="font-weight: 700">{{ settings.size }}</span></label
+          >
           <div class="pen-tool-size">
             <div
               v-for="(size, index) in tagSizes"
               class="size"
               :key="index"
-              :style="{ backgroundColor:`#${settings.color}` ,width: size, height: size }"
+              :style="{ backgroundColor: `#${settings.color}`, width: size, height: size }"
               @click="changePinSize(size)"
             >
-            </div> 
+            </div>
           </div>
         </div>
       </form>
-      <prime-button
-        label="Confirmer"
-        :disabled="isError"
-        @click="handleCreateTag"
-      />
-    </Dialog> 
-    <div 
-      class="board">
+      <prime-button label="Confirmer" :disabled="isError" @click="handleCreateTag" />
+    </Dialog>
+    <div class="board">
       <!-- Liste des épingles -->
-      <div
-        class="boardImg">
-        <div
-          id="board"
-          class="pin-wrapper"
-        >
-          <img 
-            ref="BoardImageRef"
-            @click="handleClick"
-            :src="getBackgroundImg"
-          />
-          <p v-show="!image" >L'image que vous chargez doit faire moins de 5 Mo.</p>
+      <div class="boardImg">
+        <div id="board" class="pin-wrapper">
+          <img ref="BoardImageRef" @click="handleClick" :src="getBackgroundImg" />
+          <p v-show="!image">L'image que vous chargez doit faire moins de 5 Mo.</p>
         </div>
       </div>
     </div>
   </section>
 </template>
 <style scoped lang="scss">
-.board{  
-  width: 80vw; 
-  max-height: calc(80vh - var(--navbar-height));
-  aspect-ratio: 1 / 1; 
-}
-.pin-wrapper{
-  position: relative;
-  width: fit-content;
-  height: fit-content;
-  p{
-    text-align: center;
-    font-style: italic;
-    opacity: 0.5;
-  }
-}
-.boardImg{ 
-  height: 100%; 
-  width: 100%;
-  display: flex;  
-  justify-content: center;
-  align-items: center;
-  img{
-    cursor: pointer;
-    max-width:100%;
+  .board {
+    width: 80vw;
     max-height: calc(80vh - var(--navbar-height));
-    margin:auto 0;
+    aspect-ratio: 1 / 1;
+  }
+  .pin-wrapper {
     position: relative;
-    top: 0;
-    left: 0;    
+    width: fit-content;
+    height: fit-content;
+    p {
+      text-align: center;
+      font-style: italic;
+      opacity: 0.5;
+    }
   }
-}  
-.error-msg{
-  color: red;
-  margin-left: 8px;
-}
-.pen-tool-size{
-  .size{ 
-    cursor: pointer;  
+  .boardImg {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      cursor: pointer;
+      max-width: 100%;
+      max-height: calc(80vh - var(--navbar-height));
+      margin: auto 0;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
   }
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(0,0,0,0.2);
-  gap: 24px;
-}
-
+  .error-msg {
+    color: red;
+    margin-left: 8px;
+  }
+  .pen-tool-size {
+    .size {
+      cursor: pointer;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    gap: 24px;
+  }
 </style>

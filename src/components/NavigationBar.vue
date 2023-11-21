@@ -14,14 +14,15 @@
     router.push(to).then(() => (isResponsive.value = false))
   }
   const isWindowSmall = computed(() => width.value < 600)
-  const tabs = router.getRoutes()
-    .filter(route=>route.name && route.name !== 'landing')
-    .map(route => { 
+  const tabs = router
+    .getRoutes()
+    .filter((route) => route.name && route.name !== 'landing')
+    .map((route) => {
       return {
         name: route.name,
         path: route.path
       }
-    }) 
+    })
 </script>
 <template>
   <prime-modal
@@ -52,17 +53,9 @@
     </template>
   </prime-modal>
   <nav>
-    <ul
-      class="topnav"
-      :class="{ responsive: isWindowSmall }">
-      <div
-        class="actions"
-        v-show="!isWindowSmall">
-        <router-link
-          class="isactive"
-          v-for="(tab, index) in tabs"
-          :key="index"
-          :to="tab.path">
+    <ul class="topnav" :class="{ responsive: isWindowSmall }">
+      <div class="actions" v-show="!isWindowSmall">
+        <router-link class="isactive" v-for="(tab, index) in tabs" :key="index" :to="tab.path">
           {{ tab.name }}
         </router-link>
       </div>

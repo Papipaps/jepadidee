@@ -15,13 +15,8 @@
 
 <template>
   <Transition appear>
-    <div
-      class="lottie-animation-wrapper"
-      v-if="isModalOpen">
-      <vue3-lottie
-        :animation-data="lottieLoaderAnimation"
-        :height="400"
-        :width="400" />
+    <div class="lottie-animation-wrapper" v-if="isModalOpen">
+      <vue3-lottie :animation-data="lottieLoaderAnimation" :height="400" :width="400" />
       <p class="subtitle">Pas d'idée ? Ne t'inquiètes pas, on est la pour toi ! </p>
       <Transition>
         <prime-button
@@ -49,7 +44,7 @@
       height: 50px;
       margin: 10px auto;
       transition: ease-in 50ms;
-      &:hover{
+      &:hover {
         scale: 1.2;
         color: var(--accent-color);
       }

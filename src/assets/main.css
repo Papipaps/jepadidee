@@ -3,7 +3,7 @@
 :root {
   --text-color: #333;
   --text-color-white: #eeeeee;
-  --accent-color: #ffbb00; 
+  --accent-color: #ffbb00;
   --navbar-height: 48px;
 }
 
@@ -17,14 +17,12 @@
   font-size: 18px;
   font-weight: bold;
   color: var(--text-color);
-
 }
 
 .main-text {
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-color);
-
 }
 
 .link {
@@ -32,10 +30,11 @@
   text-decoration: none;
 }
 
-.router-link-active, .router-link-exact-active{
+.router-link-active,
+.router-link-exact-active {
   background-color: var(--accent-color);
   color: black !important;
-  font-weight: 700;  
+  font-weight: 700;
   text-transform: uppercase;
 }
 

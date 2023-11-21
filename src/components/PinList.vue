@@ -1,14 +1,7 @@
 <template>
-  <ul
-    class="pin-list"
-    v-if="tags">
-    <li
-      v-for="tag in tags"
-      :key="tag.id">
-      <PinCard
-        :tag="tag"
-        @click="openTag(tag.id)"
-        @mouseover="highlightPoint(tag.id)" />
+  <ul class="pin-list" v-if="tags">
+    <li v-for="tag in tags" :key="tag.id">
+      <PinCard :tag="tag" @click="openTag(tag.id)" @mouseover="highlightPoint(tag.id)" />
     </li>
   </ul>
 </template>
@@ -50,7 +43,7 @@
 </script>
 
 <style scoped lang="scss">
-  .pin-list { 
+  .pin-list {
     background: var(--text-color-white);
     border-radius: 5px;
     list-style: none;
@@ -64,7 +57,7 @@
     grid-template-rows: min-content(2);
     li {
       margin: 8px auto;
-      width: 90%; 
+      width: 90%;
       &:hover {
         cursor: pointer;
         filter: brightness(0.9);

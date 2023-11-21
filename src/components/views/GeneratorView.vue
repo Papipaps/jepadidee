@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import { useToast } from 'primevue/usetoast'
-  import ToolBox from '@/components/ToolBox.vue' 
+  import ToolBox from '@/components/ToolBox.vue'
   import AnimatedBackground from '@/assets/AnimatedBackground.vue'
   interface Palette {
     name: string
@@ -56,10 +56,9 @@
       life: 5000
     })
   }
-
 </script>
 
-<template> 
+<template>
   <main>
     <section class="centered-container">
       <div class="content">
@@ -88,7 +87,7 @@
             ></prime-button>
           </div>
           <i
-          >Cliquez sur la couleur pour copier la valeur hex (note: #RougeVertBleu, donc rouge =
+            >Cliquez sur la couleur pour copier la valeur hex (note: #RougeVertBleu, donc rouge =
             #FF0000)</i
           >
         </div>

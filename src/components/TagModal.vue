@@ -1,5 +1,5 @@
-<script setup lang="ts">  
-import type { Tag } from './PinMap.vue'
+<script setup lang="ts">
+  import type { Tag } from './PinMap.vue'
   import { inject, onMounted } from 'vue'
   interface Props {
     preview: Tag
@@ -7,14 +7,14 @@ import type { Tag } from './PinMap.vue'
   const emit = defineEmits(['close'])
   const { preview } = defineProps<Props>()
   const deleteTag = inject('removeTag') as (id: string) => void
-  
+
   function handleUpdate() {}
-  
-  function handleRemove(){
+
+  function handleRemove() {
     deleteTag(preview.id)
     emit('close')
   }
-  
+
   onMounted(() => {
     const parent = document.getElementById('tag-modal-description')
     parent?.insertAdjacentHTML('afterbegin', preview.description)
@@ -23,21 +23,13 @@ import type { Tag } from './PinMap.vue'
 
 <template>
   <div class="tag-modal-wrapper">
-    <div
-      id="tag-modal-description"
-      class="tag-modal-description"></div>
+    <div id="tag-modal-description" class="tag-modal-description"></div>
     <div class="tag-actions">
-      <prime-button
-        @click="handleUpdate"
-        label="Modifier"
-        disabled/>
-      <prime-button
-        @click="handleRemove"
-        label="Supprimer"/>
+      <prime-button @click="handleUpdate" label="Modifier" disabled />
+      <prime-button @click="handleRemove" label="Supprimer" />
     </div>
   </div>
 </template>
-
 
 <style scoped>
   .tag-modal-description {

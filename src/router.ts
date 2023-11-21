@@ -13,18 +13,22 @@ const router = createRouter({
     },
     {
       path: '/generator',
-      name: 'Générateur d\'idée',
+      name: "Générateur d'idée",
       component: () =>
-      import(/*webpackChunkName:"generator"*/ '@/components/views/GeneratorView.vue')
+        import(/*webpackChunkName:"generator"*/ '@/components/views/GeneratorView.vue')
     },
     {
       path: '/tagmeup',
       name: 'Tag Me Up',
-      component: () =>
-      import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
+      component: () => import(/*webpackChunkName:"tagmeup"*/ '@/components/views/TagMeUp.vue')
     },
     {
-      path: '/:pathMatch(.*)*', 
+      path: '/daily',
+      name: 'Un dessin par jour',
+      component: () => import(/*webpackChunkName:"daily"*/ '@/components/views/TestView.vue')
+    },
+    {
+      path: '/:pathMatch(.*)*',
       component: () => import('@/components/views/UnavailableView.vue'),
       meta: {
         hideHUD: true
