@@ -2,8 +2,21 @@
   import lottieLoaderAnimation from '@/assets/animations/loader.json'
   import router from '@/router'
   import { useModal } from '@/utilities/useModal'
+  import { useAuth0 } from '@auth0/auth0-vue'
+  import { useUserStore } from '@/stores/user-store';
 
   const { isModalOpen, open, close } = useModal(true)
+  const { loginWithPopup, isAuthenticated, user } = useAuth0()
+
+  const { login } = useUserStore()
+
+  function handleLogin(){
+    loginWithPopup().then(()=>{
+      login(user.value)
+      router.push('/generator')
+    })
+  }
+
   function handleClick() {
     close()
     setTimeout(() => {
@@ -19,15 +32,18 @@
       <vue3-lottie :animation-data="lottieLoaderAnimation" :height="400" :width="400" />
       <p class="subtitle">Pas d'idée ? Ne t'inquiètes pas, on est la pour toi ! </p>
       <Transition>
-        <prime-button
-          rounded
-          outlined
-          class="go-btn"
-          icon="pi pi-check"
-          severity="secondary"
-          aria-label="Search"
-          @click="handleClick"
-        />
+        <div>
+          <prime-button
+            rounded
+            outlined
+            class="go-btn"
+            icon="pi pi-check"
+            severity="secondary"
+            aria-label="Search"
+            @click="handleClick"
+          />
+          <prime-button @click="handleLogin" />
+        </div>
       </Transition>
     </div>
   </Transition>

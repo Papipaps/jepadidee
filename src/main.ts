@@ -15,6 +15,7 @@ import ToastService from 'primevue/toastservice'
 import router from '@/router'
 import i18n from './assets/locales/i18n'
 import { createPinia } from 'pinia'
+import { createAuth0 } from '@auth0/auth0-vue'
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -25,6 +26,15 @@ app.use(router)
 app.use(PrimeVue)
 app.use(i18n)
 app.use(Vue3Lottie)
+app.use(
+  createAuth0({
+    domain: '',
+    clientId: '',
+    authorizationParams: {
+      redirect_uri: window.location.origin
+    }
+  })
+)
 
 app.directive('tooltip', Tooltip)
 

@@ -3,6 +3,14 @@
   import NavigationBar from '@/components/NavigationBar.vue'
   import Toast from 'primevue/toast'
   import InformationModal from './components/InformationModal.vue'
+  import { useAuth0 } from '@auth0/auth0-vue'
+import { watch } from 'vue'
+
+  const { user } = useAuth0()
+
+  watch([ user ],()=>{
+    console.log("changes !",user.value)
+  })
 </script>
 <template>
   <main>
