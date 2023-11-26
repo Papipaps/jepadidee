@@ -1,33 +1,47 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
-interface UserState {
-  isAuthenticated: boolean;
-  user: Record<string, unknown> | null;
+import { useLocalStorage } from '@vueuse/core'
+
+export interface AppUser {
+  id?: number
+  firstName?: string
+  lastName?: string
+  email: string
+  lastUpload?: Date
+  drawings?: Record<string, unknown>[]
+}
+
+export interface UserState {
+  isAuthenticated: boolean
+  user: AppUser | null
 }
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
     isAuthenticated: false,
-    user: null,
+    user: null
   }),
 
   actions: {
     setIsAuthenticated(isAuthenticated: boolean): void {
-      this.isAuthenticated = isAuthenticated;
+      this.isAuthenticated = isAuthenticated
     },
 
-    setUser(user: Record<string, unknown> | null): void {
-      this.user = user;
+    setUser(user: AppUser | null): void {
+      this.user = user
     },
 
-    login(user: Record<string, unknown>): void {
-      this.setIsAuthenticated(true);
-      this.setUser(user);
+    login(user: AppUser): void {
+      console.log('user', user)
+      this.setIsAuthenticated(true)
+      this.setUser(user)
+      useLocalStorage('jepadidee-logged-user', JSON.stringify(user.value))
     },
 
     logout(): void {
-      this.setIsAuthenticated(false);
-      this.setUser(null);
-    },
-  },
-});
+      this.setIsAuthenticated(false)
+      this.setUser(null)
+      localStorage.removeItem('jepadidee-logged-user')
+    }
+  }
+})

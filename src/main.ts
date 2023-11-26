@@ -28,10 +28,10 @@ app.use(i18n)
 app.use(Vue3Lottie)
 app.use(
   createAuth0({
-    domain: '',
-    clientId: '',
+    domain: import.meta.env.VITE_DOMAIN,
+    clientId: import.meta.env.VITE_CLIENT_ID,
     authorizationParams: {
-      redirect_uri: window.location.origin
+      redirect_uri: import.meta.env.VITE_API_CALLBACK_URL
     }
   })
 )

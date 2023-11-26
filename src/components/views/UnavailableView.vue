@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import router from '@/router'
+  import router, { getNavigatorPaths } from '@/router'
   import { onMounted, ref, watch } from 'vue'
 
   const countDown = ref(5)
@@ -9,7 +9,7 @@
     }, 1000)
   }
   watch([countDown], () => {
-    if (countDown.value < 0) router.push('generator')
+    if (countDown.value < 0) router.push(getNavigatorPaths.GENERATOR)
   })
   onMounted(() => {
     start()

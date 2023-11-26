@@ -8,10 +8,12 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { useUserStore } from '@/stores/user-store'
+  import { onMounted, ref } from 'vue'
 
   const imageRef = ref(null)
   const displayedImage = ref('')
+  const { user } = useUserStore()
 
   const handleImageChange = (event) => {
     const file = event.target.files[0]
@@ -25,7 +27,7 @@
 
     const formData = new FormData()
     formData.append('image', imageRef.value)
-    formData.append('drawing', JSON.stringify({ title: 'titre' }))
+    formData.append('drawing', JSON.stringify({ title: 'titre', owner: user.email }))
 
     const response = await fetch(`http://localhost:8000/api/drawings/upload`, {
       method: 'POST',

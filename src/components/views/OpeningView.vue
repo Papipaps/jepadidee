@@ -1,26 +1,25 @@
 <script lang="ts" setup>
   import lottieLoaderAnimation from '@/assets/animations/loader.json'
-  import router from '@/router'
+  import router, { getNavigatorPaths } from '@/router'
   import { useModal } from '@/utilities/useModal'
   import { useAuth0 } from '@auth0/auth0-vue'
-  import { useUserStore } from '@/stores/user-store';
+  import { useUserStore } from '@/stores/user-store'
 
   const { isModalOpen, open, close } = useModal(true)
   const { loginWithPopup, isAuthenticated, user } = useAuth0()
 
   const { login } = useUserStore()
 
-  function handleLogin(){
-    loginWithPopup().then(()=>{
+  async function handleLogin() {
+    loginWithPopup().then(() => {
       login(user.value)
-      router.push('/generator')
     })
   }
 
   function handleClick() {
     close()
     setTimeout(() => {
-      router.push('generator')
+      router.push(getNavigatorPaths.GENERATOR)
     }, 500)
   }
   defineExpose({ open, close })

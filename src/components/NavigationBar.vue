@@ -16,7 +16,7 @@
   const isWindowSmall = computed(() => width.value < 600)
   const tabs = router
     .getRoutes()
-    .filter((route) => route.name && route.name !== 'landing')
+    .filter((route) => !route.meta.IsInNavbar)
     .map((route) => {
       return {
         name: route.name,
@@ -55,6 +55,9 @@
   <nav>
     <ul class="topnav" :class="{ responsive: isWindowSmall }">
       <div class="actions" v-show="!isWindowSmall">
+        <router-link to="/">
+          <p>LOGO</p>
+        </router-link>
         <router-link class="isactive" v-for="(tab, index) in tabs" :key="index" :to="tab.path">
           {{ tab.name }}
         </router-link>
